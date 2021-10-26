@@ -83,28 +83,48 @@ class block_ace extends block_base {
         $this->content->footer = '';
 
         $type = $this->config->graphtype ?? 'student';
-        $func = 'local_ace_' . $type . '_graph';
-        if (!function_exists($func)) {
-            return $this->content;
-        }
-        $graph = call_user_func($func, $USER->id, 0, false);
-        if ($graph === '') {
-            // Display graph image when there are no analytics.
-            $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
-            $title = get_string('viewyourdashboard', 'block_ace');
-            $attributes = array(
-                'src' => $OUTPUT->image_url('graph', 'block_ace'),
-                'alt' => $title,
-                'class' => 'graphimage',
-            );
-            $text = html_writer::link($url, html_writer::empty_tag('img', $attributes));
-        } else {
-            $text = html_writer::div($graph, 'usergraph');
-        }
 
-        $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
-        $title = get_string('viewyourdashboard', 'block_ace');
-        $text .= html_writer::link($url, $title, array('class' => 'textlink'));
+        switch ($type) {
+            case 'student':
+                $usercontext = context_user::instance($USER->id);
+                if (!has_capability('local/ace:viewown', $usercontext)) {
+                    return $this->content;
+                }
+
+                $graph = local_ace_student_graph($USER->id, 0, false);
+                if ($graph === '') {
+                    // Display graph image when there are no analytics.
+                    $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
+                    $title = get_string('viewyourdashboard', 'block_ace');
+                    $attributes = array(
+                        'src' => $OUTPUT->image_url('graph', 'block_ace'),
+                        'alt' => $title,
+                        'class' => 'graphimage',
+                    );
+                    $text = html_writer::link($url, html_writer::empty_tag('img', $attributes));
+                } else {
+                    $text = html_writer::div($graph, 'usergraph');
+                }
+                $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
+                $title = get_string('viewyourdashboard', 'block_ace');
+                $text .= html_writer::link($url, $title, array('class' => 'textlink'));
+                break;
+            case 'course':
+                if ($this->page->course->id == SITEID) {
+                    return $this->content;
+                }
+                $coursecontext = context_course::instance($this->page->course->id);
+                if (!has_capability('local/ace:view', $coursecontext)) {
+                    return $this->content;
+                }
+
+                $graph = local_ace_course_graph($this->page->course->id);
+                $text = html_writer::div($graph, 'teachergraph');
+                break;
+            default:
+                $text = '';
+                break;
+        }
 
         $this->content->text = $text;
 

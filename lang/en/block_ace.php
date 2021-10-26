@@ -32,4 +32,4 @@ $string['privacy:metadata'] = 'The Engagement analytics block does not store or 
 $string['viewyourdashboard'] = 'View your dashboard';
 $string['graphtype'] = 'Graph Type';
 $string['student'] = 'Student Engagement';
-$string['course'] = 'Overall course engagement';
+$string['course'] = 'Course Engagement';
