@@ -35,7 +35,8 @@ class block_ace_edit_form extends block_edit_form {
         // E.g. student maps to local_ace_student_graph().
         $types = [
             'student' => get_string('student', 'block_ace'),
-            'course' => get_string('course', 'block_ace')
+            'course' => get_string('course', 'block_ace'),
+            'studentwithtabs' => get_string('studentwithtabs', 'block_ace'),
         ];
 
         $mform->addElement('select', 'config_graphtype', get_string('graphtype', 'block_ace'), $types);

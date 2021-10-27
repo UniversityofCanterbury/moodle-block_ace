@@ -33,3 +33,4 @@ $string['viewyourdashboard'] = 'View your dashboard';
 $string['graphtype'] = 'Graph Type';
 $string['student'] = 'Student Engagement';
 $string['course'] = 'Course Engagement';
+$string['studentwithtabs'] = 'Student Engagement w/ Course Tabs';

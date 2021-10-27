@@ -86,8 +86,7 @@ class block_ace extends block_base {
 
         switch ($type) {
             case 'student':
-                $usercontext = context_user::instance($USER->id);
-                if (!has_capability('local/ace:viewown', $usercontext)) {
+                if (!has_capability('local/ace:viewown', $this->page->context)) {
                     return $this->content;
                 }
 
@@ -120,6 +119,16 @@ class block_ace extends block_base {
 
                 $graph = local_ace_course_graph($this->page->course->id);
                 $text = html_writer::div($graph, 'teachergraph');
+                break;
+            case 'studentwithtabs':
+                if (!has_capability('local/ace:viewown', $this->page->context)) {
+                    $this->content->text = 'yeeehaw';
+                    return $this->content;
+                }
+
+                $courseid = optional_param('course', 0, PARAM_INT);
+                $text = local_ace_student_full_graph($USER->id, $courseid);
+
                 break;
             default:
                 $text = '';
