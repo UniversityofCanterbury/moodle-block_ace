@@ -2,7 +2,7 @@
     display: none;
 }
 
-.graphimage {
+#page-content .block_ace .graphimage {
     width: 100%;
 }
 
