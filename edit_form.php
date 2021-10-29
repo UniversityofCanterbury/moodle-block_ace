@@ -37,6 +37,7 @@ class block_ace_edit_form extends block_edit_form {
             'student' => get_string('student', 'block_ace'),
             'course' => get_string('course', 'block_ace'),
             'studentwithtabs' => get_string('studentwithtabs', 'block_ace'),
+            'teachercourse' => get_string('teachercourse', 'block_ace'),
         ];
 
         $mform->addElement('select', 'config_graphtype', get_string('graphtype', 'block_ace'), $types);

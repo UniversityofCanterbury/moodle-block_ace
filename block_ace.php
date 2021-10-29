@@ -122,13 +122,17 @@ class block_ace extends block_base {
                 break;
             case 'studentwithtabs':
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
-                    $this->content->text = 'yeeehaw';
                     return $this->content;
                 }
 
                 $courseid = optional_param('course', 0, PARAM_INT);
                 $text = local_ace_student_full_graph($USER->id, $courseid);
-
+                break;
+            case 'teachercourse':
+                if (!has_capability('local/ace:viewown', $this->page->context)) {
+                    return $this->content;
+                }
+                $text = local_ace_teacher_course_graph($USER->id);
                 break;
             default:
                 $text = '';
