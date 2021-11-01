@@ -67,7 +67,8 @@ class block_ace extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $USER, $OUTPUT;
+        global $USER, $OUTPUT, $DB;
+
         if ($this->content !== null) {
             return $this->content;
         }
@@ -90,10 +91,18 @@ class block_ace extends block_base {
                     return $this->content;
                 }
 
-                $graph = local_ace_student_graph($USER->id, 0, false);
+                $contextid = optional_param('contextid', 0, PARAM_INT);
+                if ($contextid != 0) {
+                    $context = context::instance_by_id($contextid, MUST_EXIST);
+                    $userid = $DB->get_record('user', array('id' => $context->instanceid))->id;
+                } else {
+                    $userid = $USER->id;
+                }
+
+                $graph = local_ace_student_graph($userid, 0, false);
                 if ($graph === '') {
                     // Display graph image when there are no analytics.
-                    $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
+                    $url = new moodle_url('/local/ace/user.php', array('id' => $userid));
                     $title = get_string('viewyourdashboard', 'block_ace');
                     $attributes = array(
                         'src' => $OUTPUT->image_url('graph', 'block_ace'),
@@ -104,7 +113,7 @@ class block_ace extends block_base {
                 } else {
                     $text = html_writer::div($graph, 'usergraph');
                 }
-                $url = new moodle_url('/local/ace/user.php', array('id' => $USER->id));
+                $url = new moodle_url('/local/ace/user.php', array('id' => $userid));
                 $title = get_string('viewyourdashboard', 'block_ace');
                 $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                 break;
