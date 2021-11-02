@@ -86,15 +86,7 @@ class block_ace extends block_base {
 
         switch ($type) {
             case 'student':
-                $userid = $USER->id;
-
-                $contextid = optional_param('contextid', 0, PARAM_INT);
-                if ($contextid != 0) {
-                    $context = context::instance_by_id($contextid, IGNORE_MISSING);
-                    if ($context != null && $context->contextlevel == CONTEXT_USER) {
-                        $userid = $DB->get_record('user', array('id' => $context->instanceid))->id;
-                    }
-                }
+                $userid = $this->get_userid_from_contextid();
 
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
                     return $this->content;
@@ -133,12 +125,16 @@ class block_ace extends block_base {
                 $text = html_writer::div($graph, 'teachergraph');
                 break;
             case 'studentwithtabs':
+                $userid = $this->get_userid_from_contextid();
+
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
+                    return $this->content;
+                } else if ($userid != $USER->id && !has_capability('local/ace:view', $this->page->context)) {
                     return $this->content;
                 }
 
                 $courseid = optional_param('course', 0, PARAM_INT);
-                $text = local_ace_student_full_graph($USER->id, $courseid);
+                $text = local_ace_student_full_graph($userid, $courseid);
                 break;
             case 'teachercourse':
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
@@ -154,6 +150,30 @@ class block_ace extends block_base {
         $this->content->text = $text;
 
         return $this->content;
+    }
+
+    /**
+     * Returns the user ID from the contextid url parameter.
+     * Defaults to current logged-in user if contextid is not available.
+     *
+     * @return int User ID
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    private function get_userid_from_contextid(): int {
+        global $USER, $DB;
+
+        $userid = $USER->id;
+
+        $contextid = optional_param('contextid', 0, PARAM_INT);
+        if ($contextid != 0) {
+            $context = context::instance_by_id($contextid, IGNORE_MISSING);
+            if ($context != null && $context->contextlevel == CONTEXT_USER) {
+                $userid = $DB->get_record('user', array('id' => $context->instanceid))->id;
+            }
+        }
+
+        return $userid;
     }
 
     /**
