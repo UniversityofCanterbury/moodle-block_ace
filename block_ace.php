@@ -68,7 +68,6 @@ class block_ace extends block_base {
      */
     public function get_content() {
         global $USER, $OUTPUT, $DB;
-
         if ($this->content !== null) {
             return $this->content;
         }
@@ -87,16 +86,20 @@ class block_ace extends block_base {
 
         switch ($type) {
             case 'student':
-                if (!has_capability('local/ace:viewown', $this->page->context)) {
-                    return $this->content;
-                }
+                $userid = $USER->id;
 
                 $contextid = optional_param('contextid', 0, PARAM_INT);
                 if ($contextid != 0) {
-                    $context = context::instance_by_id($contextid, MUST_EXIST);
-                    $userid = $DB->get_record('user', array('id' => $context->instanceid))->id;
-                } else {
-                    $userid = $USER->id;
+                    $context = context::instance_by_id($contextid, IGNORE_MISSING);
+                    if ($context != null && $context->contextlevel == CONTEXT_USER) {
+                        $userid = $DB->get_record('user', array('id' => $context->instanceid))->id;
+                    }
+                }
+
+                if (!has_capability('local/ace:viewown', $this->page->context)) {
+                    return $this->content;
+                } else if ($userid != $USER->id && !has_capability('local/ace:view', $this->page->context)) {
+                    return $this->content;
                 }
 
                 $graph = local_ace_student_graph($userid, 0, false);
