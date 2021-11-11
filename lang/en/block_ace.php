@@ -35,3 +35,4 @@ $string['student'] = 'Student Engagement';
 $string['course'] = 'Course Engagement';
 $string['studentwithtabs'] = 'Student Engagement w/ Course Tabs';
 $string['teachercourse'] = 'Teacher Course Engagement';
+$string['activity'] = 'Activity Engagement';

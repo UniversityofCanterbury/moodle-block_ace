@@ -83,6 +83,7 @@ class block_ace extends block_base {
         $this->content->footer = '';
 
         $type = $this->config->graphtype ?? 'student';
+        $text = '';
 
         switch ($type) {
             case 'student':
@@ -142,8 +143,13 @@ class block_ace extends block_base {
                 }
                 $text = local_ace_teacher_course_graph($USER->id);
                 break;
+            case 'activity':
+                if (!has_capability('local/ace:view', $this->page->context)) {
+                    return $this->content;
+                }
+                $text = local_ace_course_module_engagement_graph($this->page->context->instanceid);
+                break;
             default:
-                $text = '';
                 break;
         }
 
