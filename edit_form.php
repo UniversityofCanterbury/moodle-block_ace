@@ -41,6 +41,13 @@ class block_ace_edit_form extends block_edit_form {
             'activity' => get_string('activity', 'block_ace'),
         ];
 
+        $context = context_system::instance();
+        foreach ($types as $cap => $str) {
+            if (!has_capability('block/ace:' . $cap, $context)) {
+                unset($types[$cap]);
+            }
+        }
+
         $mform->addElement('select', 'config_graphtype', get_string('graphtype', 'block_ace'), $types);
         $mform->setDefault('config_graphtype', 'student');
     }
