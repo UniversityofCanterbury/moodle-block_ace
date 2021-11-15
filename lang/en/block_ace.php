@@ -41,3 +41,5 @@ $string['course'] = 'Course Engagement';
 $string['studentwithtabs'] = 'Student Engagement w/ Course Tabs';
 $string['teachercourse'] = 'Teacher Course Engagement';
 $string['activity'] = 'Activity Engagement';
+$string['studentdashboardurl'] = 'Student dashboard url';
+$string['studentdashboardurl_desc'] = 'The url for the student dashboard - used when clicking to view full report.';

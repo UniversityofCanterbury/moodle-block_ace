@@ -15,20 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * block_ace settings
  *
  * @package     block_ace
  * @copyright   2021 University of Canterbury
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->component = 'block_ace';
-$plugin->release = '1.0';
-$plugin->version = 2021111201;
-$plugin->requires = 2020061500;
-$plugin->maturity = MATURITY_STABLE;
-$plugin->dependencies = array(
-    'local_ace' => 2021111100,
-);
+if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configtext('block_ace/studentdashboardurl',
+                       get_string('studentdashboardurl', 'block_ace'),
+                       get_string('studentdashboardurl_desc', 'block_ace'), ''));
+
+}
