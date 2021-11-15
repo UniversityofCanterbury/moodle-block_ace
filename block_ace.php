@@ -53,6 +53,15 @@ class block_ace extends block_base {
     }
 
     /**
+     * Has site level config.
+     *
+     * @return bool
+     */
+    public function has_config() {
+        return true;
+    }
+
+    /**
      * Sets the applicable formats for the block.
      *
      * @return string[] Array of pages and permissions.
@@ -96,9 +105,9 @@ class block_ace extends block_base {
                 }
 
                 $graph = local_ace_student_graph($userid, 0, false);
+                $url = new moodle_url(get_config('block_ace', 'studentdashboardurl'));
                 if ($graph === '') {
                     // Display graph image when there are no analytics.
-                    $url = new moodle_url('/local/ace/user.php', array('id' => $userid));
                     $title = get_string('viewyourdashboard', 'block_ace');
                     $attributes = array(
                         'src' => $OUTPUT->image_url('graph', 'block_ace'),
@@ -109,7 +118,6 @@ class block_ace extends block_base {
                 } else {
                     $text = html_writer::div($graph, 'usergraph');
                 }
-                $url = new moodle_url('/local/ace/user.php', array('id' => $userid));
                 $title = get_string('viewyourdashboard', 'block_ace');
                 $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                 break;
