@@ -118,29 +118,52 @@ class block_ace extends block_base {
                     $text = html_writer::link($url, html_writer::empty_tag('img', $attributes));
                 } else {
                     $hiddenpref = get_user_preferences('block_ace_student_hidden_graph', false);
-                    if ($hiddenpref) {
-                        // Show static image when hidden.
-                        $title = get_string('viewyourdashboard', 'block_ace');
-                        $attributes = array(
-                            'src' => $OUTPUT->image_url('graph', 'block_ace'),
-                            'alt' => $title,
-                            'class' => 'graphimage',
-                        );
-                        $text = html_writer::empty_tag('img', $attributes);
-                        $switchtitle = get_string('switchtolivegraph', 'block_ace');
-                    } else {
-                        // Show live graph.
-                        $text = html_writer::div($graph, 'usergraph');
-                        $switchtitle = get_string('switchtostaticimage', 'block_ace');
-                    }
 
-                    $text .= html_writer::link('#', $switchtitle, ['class' => 'textlink', 'id' => 'block_ace-switch-graph']);
+                    // Live graph.
+                    $livegraph = html_writer::div($graph, 'usergraph', [
+                        'style' => 'display: ' . (!$hiddenpref ? 'block' : 'none'),
+                        'id' => 'block_ace-live'
+                    ]);
+
+                    // Static image.
+                    $title = get_string('viewyourdashboard', 'block_ace');
+                    $attributes = array(
+                        'src' => $OUTPUT->image_url('graph', 'block_ace'),
+                        'alt' => $title,
+                        'class' => 'graphimage',
+                        'style' => 'display: ' . ($hiddenpref ? 'block' : 'none'),
+                        'id' => 'block_ace-static'
+                    );
+                    $staticimage = html_writer::empty_tag('img', $attributes);
+
+                    $text .= $livegraph . $staticimage;
+
+                    // Controls for both.
+                    $staticimageebutton = get_string('switchtostaticimage', 'block_ace');
+                    $livegraphbutton = get_string('switchtolivegraph', 'block_ace');
+                    $text .= html_writer::link('#', $hiddenpref ? $livegraphbutton : $staticimageebutton, [
+                        'class' => 'textlink',
+                        'id' => 'block_ace-switchgraph'
+                    ]);
+
                     // Convert boolean to string to pass into script.
-                    $hiddenpref = !$hiddenpref ? 'true' : 'false';
+                    $hiddenpref = $hiddenpref ? 'true' : 'false';
                     user_preference_allow_ajax_update('block_ace_student_hidden_graph', PARAM_BOOL);
+                    // Switch between live & static when clicking the switch graph button.
                     $script = <<<EOF
-                        document.querySelector('#block_ace-switch-graph').addEventListener('click', () => {
-                            M.util.set_user_preference("block_ace_student_hidden_graph", {$hiddenpref});
+                        let isLiveGraphHidden = {$hiddenpref};
+                        document.querySelector('#block_ace-switchgraph').addEventListener('click', () => {
+                            isLiveGraphHidden = !isLiveGraphHidden;
+                            M.util.set_user_preference("block_ace_student_hidden_graph", isLiveGraphHidden);
+                            if (isLiveGraphHidden) {
+                                document.querySelector('#block_ace-static').style.display = 'block';
+                                document.querySelector('#block_ace-live').style.display = 'none';
+                                document.querySelector('#block_ace-switchgraph').innerText = "{$livegraphbutton}";
+                            } else {
+                                document.querySelector('#block_ace-static').style.display = 'none';
+                                document.querySelector('#block_ace-live').style.display = 'block';
+                                document.querySelector('#block_ace-switchgraph').innerText = "{$staticimageebutton}";
+                            }
                         });
 EOF;
                     $text .= html_writer::script($script);
