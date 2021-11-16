@@ -76,7 +76,8 @@ class block_ace extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $USER, $OUTPUT, $DB;
+        global $USER, $OUTPUT;
+
         if ($this->content !== null) {
             return $this->content;
         }
@@ -107,7 +108,7 @@ class block_ace extends block_base {
                 $graph = local_ace_student_graph($userid, 0, false);
                 $url = new moodle_url(get_config('block_ace', 'studentdashboardurl'));
                 if ($graph === '') {
-                    // Display graph image when there are no analytics.
+                    // Display static image when there are no analytics.
                     $title = get_string('viewyourdashboard', 'block_ace');
                     $attributes = array(
                         'src' => $OUTPUT->image_url('graph', 'block_ace'),
@@ -116,8 +117,35 @@ class block_ace extends block_base {
                     );
                     $text = html_writer::link($url, html_writer::empty_tag('img', $attributes));
                 } else {
-                    $text = html_writer::div($graph, 'usergraph');
+                    $hiddenpref = get_user_preferences('block_ace_student_hidden_graph', false);
+                    if ($hiddenpref) {
+                        // Show static image when hidden.
+                        $title = get_string('viewyourdashboard', 'block_ace');
+                        $attributes = array(
+                            'src' => $OUTPUT->image_url('graph', 'block_ace'),
+                            'alt' => $title,
+                            'class' => 'graphimage',
+                        );
+                        $text = html_writer::empty_tag('img', $attributes);
+                        $switchtitle = get_string('switchtolivegraph', 'block_ace');
+                    } else {
+                        // Show live graph.
+                        $text = html_writer::div($graph, 'usergraph');
+                        $switchtitle = get_string('switchtostaticimage', 'block_ace');
+                    }
+
+                    $text .= html_writer::link('#', $switchtitle, ['class' => 'textlink', 'id' => 'block_ace-switch-graph']);
+                    // Convert boolean to string to pass into script.
+                    $hiddenpref = !$hiddenpref ? 'true' : 'false';
+                    user_preference_allow_ajax_update('block_ace_student_hidden_graph', PARAM_BOOL);
+                    $script = <<<EOF
+                        document.querySelector('#block_ace-switch-graph').addEventListener('click', () => {
+                            M.util.set_user_preference("block_ace_student_hidden_graph", {$hiddenpref});
+                        });
+EOF;
+                    $text .= html_writer::script($script);
                 }
+
                 $title = get_string('viewyourdashboard', 'block_ace');
                 $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                 break;
