@@ -82,4 +82,12 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
+    'block/ace:studentteachergraph' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
 );
