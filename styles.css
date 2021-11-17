@@ -24,3 +24,19 @@
     background-color: #fff;
     text-decoration: none;
 }
+
+#page-content #block_ace-switchgraph {
+    color: #006bae;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    line-height: 1.2rem;
+    margin: 0px auto;
+    text-align: center;
+    padding: 2px 0 0 0;
+}
+
+#page-content #block_ace-switchgraph:hover,
+#page-content #block_ace-switchgraph:focus {
+    text-decoration: underline;
+}
