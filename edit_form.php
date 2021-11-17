@@ -39,6 +39,7 @@ class block_ace_edit_form extends block_edit_form {
             'studentwithtabs' => get_string('studentwithtabs', 'block_ace'),
             'teachercourse' => get_string('teachercourse', 'block_ace'),
             'activity' => get_string('activity', 'block_ace'),
+            'studentteachergraph' => get_string('studentteachergraph', 'block_ace'),
         ];
 
         $context = context_system::instance();
