@@ -31,7 +31,7 @@
     border: none;
     border-radius: 0;
     line-height: 1.2rem;
-    margin: 0px auto;
+    margin: 0 auto;
     text-align: center;
     padding: 2px 0 0 0;
 }
@@ -42,6 +42,6 @@
 }
 
 #page-content .block_ace .chartjs-render-monitor {
-    height: 100% !important;
-    width: 100% !important;
+    height: 100% !important; /* stylelint-disable-line declaration-no-important */
+    width: 100% !important; /* stylelint-disable-line declaration-no-important */
 }  
