@@ -41,7 +41,7 @@
     text-decoration: underline;
 }
 
-#page-content .chartjs-render-monitor {
+#page-content .block_ace .chartjs-render-monitor {
     height: 100% !important;
     width: 100% !important;
 }  
