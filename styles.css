@@ -40,3 +40,8 @@
 #page-content #block_ace-switchgraph:focus {
     text-decoration: underline;
 }
+
+#page-content .chartjs-render-monitor {
+    height: 100% !important;
+    width: 100% !important;
+}  
