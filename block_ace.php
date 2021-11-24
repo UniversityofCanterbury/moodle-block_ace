@@ -116,6 +116,8 @@ class block_ace extends block_base {
                         'class' => 'graphimage',
                     );
                     $text = html_writer::link($url, html_writer::empty_tag('img', $attributes));
+                    $title = get_string('viewyourdashboard', 'block_ace');
+                    $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                 } else {
                     $hiddenpref = get_user_preferences('block_ace_student_hidden_graph', false);
 
@@ -134,10 +136,11 @@ class block_ace extends block_base {
                         'style' => 'display: ' . ($hiddenpref ? 'block' : 'none'),
                         'id' => 'block_ace-static'
                     );
-                    $staticimage = html_writer::empty_tag('img', $attributes);
+                    $staticimage = html_writer::link($url, html_writer::empty_tag('img', $attributes));
 
                     $text .= $livegraph . $staticimage;
-
+                    $title = get_string('viewyourdashboard', 'block_ace');
+                    $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                     // Controls for both.
                     $staticimageebutton = get_string('switchtostaticimage', 'block_ace');
                     $livegraphbutton = get_string('switchtolivegraph', 'block_ace');
@@ -169,8 +172,6 @@ EOF;
                     $text .= html_writer::script($script);
                 }
 
-                $title = get_string('viewyourdashboard', 'block_ace');
-                $text .= html_writer::link($url, $title, array('class' => 'textlink'));
                 break;
             case 'course':
                 if ($this->page->course->id == SITEID) {
@@ -209,14 +210,15 @@ EOF;
                 $text = local_ace_course_module_engagement_graph($this->page->context->instanceid);
                 break;
             case 'studentteachergraph':
-                $role = $DB->get_record('role', array('shortname' => 'student'));
-                if (user_has_role_assignment($USER->id, $role->id) && has_capability('local/ace:viewown', $this->page->context)) {
-                    $courseid = optional_param('course', 0, PARAM_INT);
+                $courseid = optional_param('course', 0, PARAM_INT);
+                if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid !== $USER->id
+                    && has_capability('local/ace:view', $this->page->context)) {
                     $text = local_ace_student_full_graph($USER->id, $courseid);
-                } else if (!has_capability('local/ace:view', $this->page->context)) {
+                } else if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid == $USER->id
+                    && has_capability('local/ace:view', $this->page->context)) {
                     $text = local_ace_teacher_course_graph($USER->id);
-                } else {
-                    return $this->content;
+                } else if (has_capability('local/ace:viewown', $this->page->context)) {
+                    $text = local_ace_student_full_graph($USER->id, $courseid);
                 }
                 break;
             default:
