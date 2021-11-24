@@ -76,7 +76,7 @@ class block_ace extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $USER, $DB, $OUTPUT, $PAGE;
+        global $USER, $DB, $OUTPUT;
 
         if ($this->content !== null) {
             return $this->content;
@@ -172,7 +172,6 @@ EOF;
                     $text .= html_writer::script($script);
                 }
 
-
                 break;
             case 'course':
                 if ($this->page->course->id == SITEID) {
@@ -212,10 +211,10 @@ EOF;
                 break;
             case 'studentteachergraph':
                 $courseid = optional_param('course', 0, PARAM_INT);
-                if ($PAGE->context->contextlevel == CONTEXT_USER && $PAGE->context->instanceid !== $USER->id
+                if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid !== $USER->id
                     && has_capability('local/ace:view', $this->page->context)) {
                     $text = local_ace_student_full_graph($USER->id, $courseid);
-                } else if ($PAGE->context->contextlevel == CONTEXT_USER && $PAGE->context->instanceid == $USER->id
+                } else if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid == $USER->id
                     && has_capability('local/ace:view', $this->page->context)) {
                     $text = local_ace_teacher_course_graph($USER->id);
                 } else if (has_capability('local/ace:viewown', $this->page->context)) {
