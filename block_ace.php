@@ -211,11 +211,12 @@ EOF;
                 break;
             case 'studentteachergraph':
                 $courseid = optional_param('course', 0, PARAM_INT);
-                if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid !== $USER->id
+                $userid = $this->get_userid_from_contextid();
+                if ($this->page->context->contextlevel == CONTEXT_USER && $userid != $USER->id
                     && has_capability('local/ace:view', $this->page->context)) {
-                    $text = local_ace_student_full_graph($USER->id, $courseid);
-                } else if ($this->page->context->contextlevel == CONTEXT_USER && $this->page->context->instanceid == $USER->id
-                    && has_capability('local/ace:view', $this->page->context)) {
+                    $text = local_ace_student_full_graph($userid, $courseid);
+                } else if ($this->page->context->contextlevel == CONTEXT_USER && $userid == $USER->id
+                    && has_capability('local/ace:view', context_system::instance())) {
                     $text = local_ace_teacher_course_graph($USER->id);
                 } else if (has_capability('local/ace:viewown', $this->page->context)) {
                     $text = local_ace_student_full_graph($USER->id, $courseid);
