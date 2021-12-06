@@ -48,17 +48,17 @@
 
 /*ACE engagement analytics filter - date picker*/
 
-#page-content input#date-range .form-control:disabled,
+#page-content .block_ace input#date-range .form-control:disabled,
 .form-control[readonly] {
     color: #000 !important; /* stylelint-disable-line declaration-no-important */
     border: 1px solid #ced4da !important; /* stylelint-disable-line declaration-no-important */
 }
 
-#page-content input#date-range .form-control:disabled,
+#page-content .block_ace input#date-range .form-control:disabled,
 .form-control[readonly]:hover,
-#page-content input#date-range .form-control:disabled,
+#page-content .block_ace input#date-range .form-control:disabled,
 .form-control[readonly]:focus,
-#page-content input#date-range .form-control:disabled,
+#page-content .block_ace input#date-range .form-control:disabled,
 .form-control[readonly]:active {
     cursor: pointer;
     background-color: #d3d9df !important; /* stylelint-disable-line declaration-no-important */
