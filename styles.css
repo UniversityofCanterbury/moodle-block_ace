@@ -45,3 +45,22 @@
     height: 100% !important; /* stylelint-disable-line declaration-no-important */
     width: 100% !important; /* stylelint-disable-line declaration-no-important */
 }
+
+
+/*ACE engagement analytics filter - date picker*/
+
+#page-content .block_ace input#date-range .form-control:disabled,
+.block_ace .form-control[readonly] {
+    color: #000 !important; /* stylelint-disable-line declaration-no-important */
+    border: 1px solid #ced4da !important; /* stylelint-disable-line declaration-no-important */
+}
+
+#page-content .block_ace input#date-range .form-control:disabled,
+.block_ace .form-control[readonly]:hover,
+#page-content .block_ace input#date-range .form-control:disabled,
+.block_ace .form-control[readonly]:focus,
+#page-content .block_ace input#date-range .form-control:disabled,
+.block_ace .form-control[readonly]:active {
+    cursor: pointer;
+    background-color: #d3d9df !important; /* stylelint-disable-line declaration-no-important */
+}
