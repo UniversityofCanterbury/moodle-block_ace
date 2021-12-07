@@ -52,17 +52,17 @@
     max-width: 480px !important; /* stylelint-disable-line declaration-no-important */
     margin-left: auto;
 }
-  
-  #page-content .block_ace .px-2 {
+
+#page-content .block_ace .px-2 {
     padding-right: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
-  
-  #page-content .block_ace #instance-1744481-header {
+
+#page-content .block_ace #instance-1744481-header {
     display: block !important; /* stylelint-disable-line declaration-no-important */
     text-align: center !important; /* stylelint-disable-line declaration-no-important */
 }
-  
-  #page-content .block_ace #chart-filter-options h3 {
+
+#page-content .block_ace #chart-filter-options h3 {
     font-size: 1rem;
 }
 
