@@ -57,7 +57,7 @@
     padding-right: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
-#page-content .block_ace #instance-1744481-header {
+#page-content .block_ace .card-title {
     display: block !important; /* stylelint-disable-line declaration-no-important */
     text-align: center !important; /* stylelint-disable-line declaration-no-important */
 }
