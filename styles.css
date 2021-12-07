@@ -41,11 +41,30 @@
     text-decoration: underline;
 }
 
-#page-content .block_ace .chartjs-render-monitor {
-    height: 100% !important; /* stylelint-disable-line declaration-no-important */
-    width: 100% !important; /* stylelint-disable-line declaration-no-important */
+/*ACE engagement analytics - graph*/
+
+#page-content .block_ace .card-body {
+    margin-left: auto;
+    margin-right: auto;
 }
 
+#page-content .block_ace .chartjs-render-monitor {
+    max-width: 480px !important; /* stylelint-disable-line declaration-no-important */
+    margin-left: auto;
+}
+
+#page-content .block_ace .px-2 {
+    padding-right: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+#page-content .block_ace #instance-1744481-header {
+    display: block !important; /* stylelint-disable-line declaration-no-important */
+    text-align: center !important; /* stylelint-disable-line declaration-no-important */
+}
+
+#page-content .block_ace #chart-filter-options h3 {
+    font-size: 1rem;
+}
 
 /*ACE engagement analytics filter - date picker*/
 
