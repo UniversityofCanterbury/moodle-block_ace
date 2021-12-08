@@ -88,3 +88,8 @@
     cursor: pointer;
     background-color: #d3d9df !important; /* stylelint-disable-line declaration-no-important */
 }
+
+/* Hide user icon on user dashboard pages - not really part of the block, but easier to include in here. */
+.path-veloxnet-dashboard #page-header .page-header-image {
+    display: none;
+}
