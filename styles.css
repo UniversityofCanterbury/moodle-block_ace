@@ -42,7 +42,7 @@
 }
 
 /* ACE engagement analytics - header message and contact button */
-#page-header .header-button-group {
+.path-veloxnet-dashboard #page-header .header-button-group {
     display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
