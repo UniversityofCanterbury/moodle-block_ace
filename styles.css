@@ -41,6 +41,11 @@
     text-decoration: underline;
 }
 
+/* ACE engagement analytics - header message and contact button */
+.path-veloxnet-dashboard #page-header .header-button-group {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
 /* ACE engagement analytics - graph side column*/
 #page-content [data-region="blocks-column"] .block_ace .chartjs-render-monitor {
     height: 100% !important; /* stylelint-disable-line declaration-no-important */
