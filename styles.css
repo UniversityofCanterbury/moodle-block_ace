@@ -41,11 +41,6 @@
     text-decoration: underline;
 }
 
-/* ACE engagement analytics - header message and contact button */
-.path-veloxnet-dashboard #page-header .header-button-group {
-    display: none !important; /* stylelint-disable-line declaration-no-important */
-}
-
 /* ACE engagement analytics - graph side column*/
 #page-content [data-region="blocks-column"] .block_ace .chartjs-render-monitor {
     height: 100% !important; /* stylelint-disable-line declaration-no-important */
@@ -113,4 +108,14 @@
 /* Hide user icon on user dashboard pages - not really part of the block, but easier to include in here. */
 .path-veloxnet-dashboard #page-header .page-header-image {
     display: none;
+}
+
+/* ACE engagement analytics - header message and contact button */
+.path-veloxnet-dashboard #page-header .header-button-group {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* ACE engagement analytics - header message and contact button */
+.path-veloxnet-dashboard #page-header .page-context-header .page-header-headings {
+    margin-top: 0;
 }
