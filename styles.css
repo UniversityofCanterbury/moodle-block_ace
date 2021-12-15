@@ -97,6 +97,7 @@
 .block_ace .form-control[readonly] {
     color: #000 !important; /* stylelint-disable-line declaration-no-important */
     border: 1px solid #ced4da !important; /* stylelint-disable-line declaration-no-important */
+    width: 70%;
 }
 
 #page-content .block_ace input#date-range .form-control:disabled,
