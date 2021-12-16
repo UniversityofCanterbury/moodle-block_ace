@@ -1,4 +1,4 @@
-# ACE Block #
+# Analytics for Course Engagement (ACE) Block #
 
 TODO Describe the plugin shortly here.
 
