@@ -222,7 +222,10 @@ EOF;
                 break;
         }
 
-        $this->content->text = $text;
+        $header = html_writer::tag('h5', $this->title,
+            ['title' => get_string('titlehelper', 'block_ace'), 'class' => 'block_ace-card-title']);
+
+        $this->content->text = $header . $text;
 
         return $this->content;
     }
@@ -249,14 +252,5 @@ EOF;
         }
 
         return $userid;
-    }
-
-    /**
-     * Defines configuration data.
-     *
-     * The function is called immediatly after init().
-     */
-    public function specialization() {
-        $this->title = get_string('pluginname', 'block_ace');
     }
 }

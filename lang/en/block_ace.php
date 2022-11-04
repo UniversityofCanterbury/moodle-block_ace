@@ -45,3 +45,4 @@ $string['activity'] = 'Activity Engagement';
 $string['switchtolivegraph'] = 'Switch to live graph';
 $string['switchtostaticimage'] = 'Switch to static image';
 $string['studentteachergraph'] = 'Autodetect student vs teacher graph';
+$string['titlehelper'] = 'Analytics for Course Engagement';
