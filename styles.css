@@ -66,13 +66,6 @@
     padding-right: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
-#page-content #region-main .block_ace .card-title {
-    display: block !important; /* stylelint-disable-line declaration-no-important */
-    text-align: center !important; /* stylelint-disable-line declaration-no-important */
-    margin: 0 0 0 0;
-    font-size: 1.3rem;
-}
-
 #page-content #region-main .block_ace .useranalytics .nav-tabs {
     margin-top: -0.8rem;
 }
@@ -123,4 +116,19 @@
 /* ACE engagement analytics - header message and contact button */
 .path-veloxnet-dashboard #page-header .page-context-header .page-header-headings {
     margin-top: 0;
+}
+
+#page-content #region-main .block_ace .card-title {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+#page-content #region-main .block_ace .card-text {
+    margin-top: 0 !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.block_ace-card-title {
+    display: block;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
 }
