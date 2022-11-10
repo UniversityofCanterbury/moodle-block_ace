@@ -45,4 +45,5 @@ $string['activity'] = 'Activity Engagement';
 $string['switchtolivegraph'] = 'Switch to live graph';
 $string['switchtostaticimage'] = 'Switch to static image';
 $string['studentteachergraph'] = 'Autodetect student vs teacher graph';
-$string['titlehelper'] = 'Analytics for Course Engagement';
+$string['titlehelper'] = "Analytics for Course Engagement (ACE) looks at how much students are engaging with their course materials on LEARN.<br/>
+This ACE Course Dashboard gives you an overview of the level of students' engagement in your course, and how the average engagement level of your students tracks over time.";
