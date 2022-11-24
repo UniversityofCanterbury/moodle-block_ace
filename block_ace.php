@@ -192,10 +192,6 @@ EOF;
 
                 $courseid = optional_param('course', 0, PARAM_INT);
                 $text = local_ace_student_full_graph($userid, $courseid);
-                if (class_exists("\block_dedication\lib\utils")) {
-                    $timespent = \block_dedication\lib\utils::timespent($this->page->course->id, $USER->id);
-                    $text .= html_writer::tag('p', get_string('timespentincourse', 'block_dedication'). ' ' .$timespent);
-                }
                 break;
             case 'teachercourse':
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
