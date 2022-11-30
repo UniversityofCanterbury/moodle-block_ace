@@ -45,5 +45,6 @@ $string['activity'] = 'Activity Engagement';
 $string['switchtolivegraph'] = 'Switch to live graph';
 $string['switchtostaticimage'] = 'Switch to static image';
 $string['studentteachergraph'] = 'Autodetect student vs teacher graph';
-$string['titlehelper'] = "Analytics for Course Engagement (ACE) looks at how much students are engaging with their course materials on LEARN.<br/>
-This ACE Course Dashboard gives you an overview of the level of students' engagement in your course, and how the average engagement level of your students tracks over time.";
+$string['titlehelper'] = "ACE measures how much you engage with the different activities in your courses on LEARN, whether it’s downloading reading materials, watching lecture recordings in Echo360, or participating in forums. The more you engage, the higher your engagement line will be. Regular online engagement helps ensure you keep up to date with the material and assessments in your course and is a great way to ensure you’re on track to success!<br/><br/>
+ACE does not look at your attendance in your tutorials or lectures, and it is not linked to your grades.<br/><br/>
+Additional guidance on how to use the Dashboards is available at the bottom of the page. For more information, you can also refer to the ACE FAQs or contact us using the Questions and Feedback link.";
