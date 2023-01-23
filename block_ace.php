@@ -88,6 +88,7 @@ class block_ace extends block_base {
 
         switch ($type) {
             case 'student':
+                $helptext = get_string('studenttitlehelper', 'block_ace');
                 $userid = $this->get_userid_from_contextid();
 
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
@@ -170,6 +171,7 @@ EOF;
 
                 break;
             case 'course':
+                $helptext = get_string('coursetitlehelper', 'block_ace');
                 if ($this->page->course->id == SITEID) {
                     return $this->content;
                 }
@@ -182,6 +184,7 @@ EOF;
                 $text = html_writer::div($graph, 'teachergraph');
                 break;
             case 'studentwithtabs':
+                $helptext = get_string('studentwithtabstitlehelper', 'block_ace');
                 $userid = $this->get_userid_from_contextid();
 
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
@@ -194,18 +197,21 @@ EOF;
                 $text = local_ace_student_full_graph($userid, $courseid);
                 break;
             case 'teachercourse':
+                $helptext = get_string('teachercoursetitlehelper', 'block_ace');
                 if (!has_capability('local/ace:viewown', $this->page->context)) {
                     return $this->content;
                 }
                 $text = local_ace_teacher_course_graph($USER->id);
                 break;
             case 'activity':
+                $helptext = get_string('activitytitlehelper', 'block_ace');
                 if (!has_capability('local/ace:view', $this->page->context)) {
                     return $this->content;
                 }
                 $text = local_ace_course_module_engagement_graph($this->page->context->instanceid);
                 break;
             case 'studentteachergraph':
+                $helptext = get_string('studentteachergraphtitlehelper', 'block_ace');
                 $courseid = optional_param('course', 0, PARAM_INT);
                 $userid = $this->get_userid_from_contextid();
                 if ($this->page->context->contextlevel == CONTEXT_USER && $userid != $USER->id
@@ -221,11 +227,13 @@ EOF;
             default:
                 break;
         }
-
-        $helper = '<a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-        data-content="<p>'. get_string('titlehelper', 'block_ace').'</p> "
-data-html="true" tabindex="0" data-trigger="focus" data-original-title="" title="">
-        <i class="icon fa fa-question-circle text-info fa-fw " title="'. get_string('titlehelper', 'block_ace').'" role="img" aria-label=""></i></a>';
+        $helper = '';
+        if (!empty($helptext)) {
+            $helper = '<a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
+            data-content="<p>'. $helptext.'</p> "
+    data-html="true" tabindex="0" data-trigger="focus" data-original-title="" title="">
+            <i class="icon fa fa-question-circle text-info fa-fw " title="'. $helptext.'" role="img" aria-label=""></i></a>';
+        }
 
         $header = html_writer::tag('h5', $this->title.$helper,
             ['class' => 'block_ace-card-title']);
