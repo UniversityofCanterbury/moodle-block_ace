@@ -57,3 +57,5 @@ $string['activitytitlehelper'] = "Analytics for Activity Engagement (ACE) looks 
 This ACE Course Dashboard gives you an overview of the level of students' engagement in your course, and how the average engagement level of your students tracks over time.";
 $string['studentteachergraphtitlehelper'] = "Analytics for Autodetect student vs teacher graph (ACE) looks at how much students are engaging with their course materials on LEARN.\n
 This ACE Course Dashboard gives you an overview of the level of students' engagement in your course, and how the average engagement level of your students tracks over time.";
+$string['averagetimespentincoursehelper'] = "Average time spent in course in last x days";
+
