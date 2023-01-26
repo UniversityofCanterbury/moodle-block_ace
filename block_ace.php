@@ -232,7 +232,7 @@ EOF;
             $helper = '<a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
             data-content="<p>'. $helptext.'</p> "
     data-html="true" tabindex="0" data-trigger="focus" data-original-title="" title="">
-            <i class="icon fa fa-question-circle text-info fa-fw " title="'. $helptext.'" role="img" aria-label=""></i></a>';
+            <i class="icon fa fa-question-circle text-info fa-fw " role="img" aria-label=""></i></a>';
         }
 
         $header = html_writer::tag('h5', $this->title.$helper,
