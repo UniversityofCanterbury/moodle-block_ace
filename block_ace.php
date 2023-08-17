@@ -67,7 +67,7 @@ class block_ace extends block_base {
      * @return stdClass The block contents.
      */
     public function get_content() {
-        global $USER, $DB, $OUTPUT;
+        global $USER, $SESSION, $OUTPUT;
 
         if ($this->content !== null) {
             return $this->content;
@@ -85,6 +85,9 @@ class block_ace extends block_base {
 
         $type = $this->config->graphtype ?? 'student';
         $text = '';
+
+        // Reset ACE graph filters.
+        unset($SESSION->local_ace_filtervalues);
 
         switch ($type) {
             case 'student':
